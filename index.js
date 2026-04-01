@@ -11,7 +11,13 @@ connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:5000/api/auth",
+        "https://hotelbookingfrontendpvt.vercel.app/"
+    ],
+    credentials:true
+}));
 
 app.get("/",(req,res)=>{
     console.log("Request send");
