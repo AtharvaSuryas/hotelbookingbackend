@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: [
-        "http://localhost:5000/api/auth",
+        "https://hotelbookingbackend-1-ezvs.onrender.com",
         "https://hotelbookingfrontendpvt.vercel.app/"
     ],
     credentials:true
