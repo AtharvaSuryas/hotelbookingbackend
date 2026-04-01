@@ -11,13 +11,7 @@ connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: [
-        "https://hotelbookingbackend-1-ezvs.onrender.com",
-        "https://hotelbookingfrontendpvt.vercel.app/"
-    ],
-    credentials:true
-}));
+app.use(cors());
 
 app.get("/",(req,res)=>{
     console.log("Request send");
