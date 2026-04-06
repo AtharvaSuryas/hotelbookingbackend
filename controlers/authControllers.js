@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import usermodel from '../models/usermodel.js';
 import { sendemail, transporter } from '../config/nodeMailer.js';
+import { sendEmail } from '../config/sendEmailAPI.js';
 import { text } from 'express';
 
 export const register = async(req,res)=>{
@@ -158,16 +159,15 @@ export const sendResetOtp = async(req,res)=>{
         user.resetOtp = otp;
         user.resetOtpExpiredAt = Date.now() + 15*60*1000
         await user.save();
-        const sendemail = {
-            from: process.env.SENDER_EMAIL,
-            to: user.email,
-            subject:'Password reset OTP received',
-            text:`Welcome to CODEMATE. Your OTP for resetting your password is ${otp}.Use this OTP to proceed with resetting your Password`   
-        }
-        await transporter.sendMail(sendemail);
+        sendEmail({
+            email: user.email,
+            subject: "Password Reset OTP",
+            text: `Welcome to CODEMATE. Your OTP is ${otp}. It will expire in 15 minutes.`,
+        });
         res.json({success:true,message:"Password reset OTP sent on Email"})
     }
     catch(error){
+        console.error(error);
         res.json({success:false,message:error.message})
     }
 }
