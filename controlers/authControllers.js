@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import usermodel from '../models/usermodel.js';
 import { sendemail, transporter } from '../config/nodeMailer.js';
-import { sendEmail } from '../config/sendEmailAPI.js';
+import { sendEmail } from '../config/sendEmail.js';
 import { text } from 'express';
 
 export const register = async(req,res)=>{
